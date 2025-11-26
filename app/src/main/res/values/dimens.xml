@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="globalPadding">20dp</dimen>
+    <dimen name="globalMargin">16dp</dimen>
+
+    <dimen name="smallestFont">10sp</dimen>
+    <dimen name="mediumFont">15sp</dimen>
+    <dimen name="labelFont">17sp</dimen>
+    <dimen name="btnFont">18sp</dimen>
+    <dimen name="titleFont">20sp</dimen>
+    <dimen name="bigTitleFont">22sp</dimen>
+    <dimen name="largeFont">25sp</dimen>
+    <dimen name="largestFont">30sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

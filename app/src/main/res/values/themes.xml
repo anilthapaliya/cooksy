@@ -1,0 +1,45 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="Theme.Cooksy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariant</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Customize your theme here. -->
+        <item name="textInputStyle">@style/CooksyEditText</item>
+        <item name="materialButtonStyle">@style/CooksyPrimaryButton</item>
+    </style>
+
+    <style name="CooksyEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">3dp</item>
+    </style>
+
+    <style name="CooksyPrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/btnFont</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CooksySecondaryButton">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/btnFont</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Cooksy" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+</resources>

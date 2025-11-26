@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center"
+    tools:context=".views.fragments.FoodFragment">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/foods_art"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/globalMargin"
+        android:textAlignment="center"
+        android:textSize="@dimen/bigTitleFont"
+        android:text="Variety of Dishes"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/globalMargin"
+        android:textAlignment="center"
+        android:textSize="@dimen/labelFont"
+        android:text="Cooking is fun, unless you don't burn it! \n but don't be lazy."/>
+
+
+</LinearLayout>
