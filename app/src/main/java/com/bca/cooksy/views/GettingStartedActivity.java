@@ -1,6 +1,7 @@
 package com.bca.cooksy.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bca.cooksy.R;
+import com.bca.cooksy.utils.Constants;
 import com.bca.cooksy.views.fragments.FoodFragment;
 import com.bca.cooksy.views.fragments.MenuFragment;
 import com.bca.cooksy.views.fragments.WelcomeFragment;
@@ -88,6 +90,13 @@ public class GettingStartedActivity extends AppCompatActivity {
         Intent intent = new Intent(GettingStartedActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+        markScreenAsShown();
+    }
+
+    private void markScreenAsShown() {
+
+        SharedPreferences pref = getSharedPreferences(Constants.CACHE, MODE_PRIVATE);
+        pref.edit().putBoolean(Constants.IS_GETTING_STARTED_SHOWN, true).commit();
     }
 
 }

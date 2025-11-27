@@ -1,6 +1,7 @@
 package com.bca.cooksy.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bca.cooksy.R;
 import com.bca.cooksy.controllers.LoginController;
+import com.bca.cooksy.utils.Constants;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -129,6 +131,16 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("email", etEmail.getText().toString());
         startActivity(intent);
         finish();
+        saveLoginData();
+    }
+
+    private void saveLoginData() {
+
+        SharedPreferences pref = getSharedPreferences(Constants.CACHE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(Constants.IS_LOGGED_IN, true);
+        editor.putString(Constants.EMAIL_ADDRESS, etEmail.getText().toString().trim());
+        editor.commit();
     }
 
 }

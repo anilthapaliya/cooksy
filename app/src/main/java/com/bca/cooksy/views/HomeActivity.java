@@ -1,7 +1,10 @@
 package com.bca.cooksy.views;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,10 +14,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bca.cooksy.R;
+import com.bca.cooksy.utils.Constants;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView tvUsername;
+    private ImageView imgProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +33,39 @@ public class HomeActivity extends AppCompatActivity {
         });
         Log.v(TAG, "onCreate called");
 
+        findViews();
+        setupProfile();
+    }
+
+    private void findViews() {
+
         tvUsername = findViewById(R.id.tvUsername);
+        imgProfile = findViewById(R.id.imgProfile);
+    }
+
+    private void setupProfile() {
+
+        /* Receive the email name from login screen. */
         String email = getIntent().getStringExtra("email");
-        String[] arr = email.split("@");
-        tvUsername.setText("Hi, " + arr[0]);
+
+        if (email == null) {
+            email = getEmailAddress();
+        }
+
+        if (email == null)
+            tvUsername.setText("Hi, User");
+        else {
+            String[] arr = email.split("@");
+            tvUsername.setText("Hi, " + arr[0]);
+        }
+
+        imgProfile.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ProfileActivity.class)));
+    }
+
+    private String getEmailAddress() {
+
+        SharedPreferences pref = getSharedPreferences(Constants.CACHE, MODE_PRIVATE);
+        return pref.getString(Constants.EMAIL_ADDRESS, null);
     }
 
     final String TAG = "HomeActivity";
