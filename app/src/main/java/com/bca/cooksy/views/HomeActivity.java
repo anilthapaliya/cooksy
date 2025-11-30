@@ -1,14 +1,22 @@
 package com.bca.cooksy.views;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -35,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
         findViews();
         setupProfile();
+        handlePermission();
     }
 
     private void findViews() {
@@ -66,6 +75,37 @@ public class HomeActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences(Constants.CACHE, MODE_PRIVATE);
         return pref.getString(Constants.EMAIL_ADDRESS, null);
+    }
+
+
+    private final int NOTIFICATION_CODE = 876876;
+    private void handlePermission() {
+
+        //1. Check if the permission is already granted.
+        //2. If not granted, ask for permission.
+        //3. Handle user's response.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+         != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == NOTIFICATION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "User explicitly granted notification permission", Toast.LENGTH_LONG).show();
+            }
+            else {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                        .setTitle("Notification Permission")
+                        .setMessage("This app requires notification permission to notify about updates.");
+                dialog.show();
+            }
+        }
     }
 
     final String TAG = "HomeActivity";
