@@ -79,23 +79,14 @@ If you're a student following along:
 3. Let Gradle sync
 4. Run the app on an emulator or physical device
 
----
-
-## 🧩 Contributing
-
-This is primarily a teaching/learning project, but suggestions are welcome.
-
-If you'd like to contribute:
-
-* Fork the repo
-* Create a feature branch
-* Submit a pull request
 
 ---
 
 ## 📄 License
+This project is licensed under the MIT License.
+You may use, modify, or distribute this code freely, but without any warranty.
 
-You may add a license here if needed.
+* Students can freely use, modify, and learn from code
 
 ---
 
