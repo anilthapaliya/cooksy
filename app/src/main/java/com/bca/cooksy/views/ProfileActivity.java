@@ -9,6 +9,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private MaterialCardView cardLogout;
     private ImageView imgCamera;
+    private TextView tvWeb, tvPhone, tvMessage, tvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         cardLogout = findViewById(R.id.cardLogout);
         imgCamera = findViewById(R.id.imgUpload);
+        tvWeb = findViewById(R.id.tvWebsite);
+        tvPhone = findViewById(R.id.tvPhone);
+        tvMessage = findViewById(R.id.tvMessage);
+        tvEmail = findViewById(R.id.tvEmail);
     }
 
     private final int CAMERA_CODE = 123345;
@@ -86,6 +92,33 @@ public class ProfileActivity extends AppCompatActivity {
             else {
                 openCamera();
             }
+        });
+
+        tvWeb.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://www.google.com"));
+            startActivity(intent);
+        });
+
+        tvPhone.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:9812345267"));
+            startActivity(intent);
+        });
+
+        tvMessage.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("smsto:98765454312"));
+            intent.putExtra("sms_body", "Call me as soon as you get this.");
+            startActivity(intent);
+        });
+
+        tvEmail.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:info@lang.com"));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Hello");
+            intent.putExtra(Intent.EXTRA_TEXT, "I hope this mail finds you in good health.");
+            startActivity(intent);
         });
     }
 
