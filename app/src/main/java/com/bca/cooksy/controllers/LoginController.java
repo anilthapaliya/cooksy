@@ -17,17 +17,21 @@ public class LoginController {
 
     public void performLogin() {
 
+        view.enableItems(false);
         String email = view.getEmail();
         String password = view.getPassword();
 
         if (email.isEmpty()) {
             view.showEmailError("Email can't be empty.");
+            view.enableItems(true);
         }
         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             view.showEmailError("Invalid email address.");
+            view.enableItems(true);
         }
         else if (password.isEmpty()) {
             view.showPasswordError("Password can't be empty.");
+            view.enableItems(true);
         }
         else {
             // perform login on API/backend.

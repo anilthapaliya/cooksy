@@ -1,5 +1,6 @@
 package com.bca.cooksy.views;
 
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.Manifest;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.PermissionChecker;
 import androidx.core.graphics.Insets;

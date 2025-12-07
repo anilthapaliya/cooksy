@@ -6,8 +6,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +28,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bca.cooksy.R;
 import com.bca.cooksy.utils.Constants;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView tvUsername;
     private ImageView imgProfile;
+    private HorizontalScrollView scrollDishes;
+    private ShimmerFrameLayout shimmerDishes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +52,33 @@ public class HomeActivity extends AppCompatActivity {
         findViews();
         setupProfile();
         handlePermission();
+
+        showProgress(true);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            showProgress(false);
+        }, 5000);
     }
 
     private void findViews() {
 
         tvUsername = findViewById(R.id.tvUsername);
         imgProfile = findViewById(R.id.imgProfile);
+        scrollDishes = findViewById(R.id.scrollDishes);
+        shimmerDishes = findViewById(R.id.shimmerDishes);
+    }
+
+    private void showProgress(boolean value) {
+
+        if (value) {
+            shimmerDishes.setVisibility(View.VISIBLE);
+            shimmerDishes.startShimmer();
+            scrollDishes.setVisibility(View.GONE);
+        }
+        else {
+            shimmerDishes.setVisibility(View.GONE);
+            shimmerDishes.stopShimmer();
+            scrollDishes.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupProfile() {
@@ -76,7 +105,6 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences(Constants.CACHE, MODE_PRIVATE);
         return pref.getString(Constants.EMAIL_ADDRESS, null);
     }
-
 
     private final int NOTIFICATION_CODE = 876876;
     private void handlePermission() {

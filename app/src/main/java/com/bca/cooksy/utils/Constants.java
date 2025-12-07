@@ -9,5 +9,7 @@ public class Constants {
     public static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
 
     /* Application Constants */
+    public static final String CHANNEL_APP_UPDATE = "CHANNEL_APP_UPDATE";
+    public static final String CHANNEL_NEW_RECIPE = "CHANNEL_NEW_RECIPE";
 
 }

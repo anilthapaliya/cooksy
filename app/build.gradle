@@ -40,6 +40,9 @@ dependencies {
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
 
+    implementation libs.glide // Glide imageview by Google
+    implementation libs.shimmer // Shimmer layout by Facebook
+
     implementation libs.camera.view // Camera and Preview
     implementation libs.camera.core
     implementation libs.androidx.camera.camera2

@@ -53,7 +53,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void registerEvents() {
 
-        btnLogin.setOnClickListener(view -> controller.performLogin());
+        btnLogin.setOnClickListener(view -> {
+            controller.performLogin();
+        });
 
         etPassword.setOnEditorActionListener((v, actionId, event) -> {
 
@@ -141,6 +143,13 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean(Constants.IS_LOGGED_IN, true);
         editor.putString(Constants.EMAIL_ADDRESS, etEmail.getText().toString().trim());
         editor.commit();
+    }
+
+    public void enableItems(boolean value) {
+
+        etEmail.setEnabled(value);
+        etPassword.setEnabled(value);
+        btnLogin.setEnabled(value);
     }
 
 }
