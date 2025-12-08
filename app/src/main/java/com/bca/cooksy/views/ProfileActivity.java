@@ -1,33 +1,27 @@
 package com.bca.cooksy.views;
 
-import android.app.NotificationManager;
 import android.os.Bundle;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.Settings;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.PermissionChecker;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bca.cooksy.R;
+import com.bca.cooksy.utils.NotificationUtils;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.snackbar.Snackbar;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -71,6 +65,13 @@ public class ProfileActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", (d, i) -> {
                         // perform logout
                         d.dismiss();
+                        // show login screen
+                        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        // Send notification
+                        NotificationUtils.showAppUpdatesNotification(this, "Update", "Please log back in immediately.");
+                        NotificationUtils.showAppUpdatesNotification(this, "Logged Out", "We will miss you. Please come back. Otherwise I will die here lonely. Please try to understand me.");
                     })
                     .setCancelable(false)
                     .setNegativeButton("No", (d, i) -> {

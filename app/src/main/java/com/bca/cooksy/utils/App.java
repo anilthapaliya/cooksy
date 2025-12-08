@@ -21,7 +21,7 @@ public class App extends Application {
         channelAppUpdates.enableVibration(false);
 
         NotificationChannel channelRecipes = new NotificationChannel(Constants.CHANNEL_NEW_RECIPE,
-                "New Recipes", NotificationManager.IMPORTANCE_DEFAULT);
+                "New Recipes", NotificationManager.IMPORTANCE_LOW);
         channelRecipes.setDescription("This channel shows new recipes from users.");
 
         NotificationManager manager = getSystemService(NotificationManager.class);
