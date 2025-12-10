@@ -3,12 +3,14 @@ package com.bca.cooksy.utils;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 
 import com.bca.cooksy.R;
 import com.bca.cooksy.views.HomeActivity;
+import com.bca.cooksy.views.RecipeActivity;
 import com.bca.cooksy.views.SplashActivity;
 
 import java.util.Random;
@@ -32,6 +34,27 @@ public class NotificationUtils {
         Random random = new Random();
         NotificationManager manager = context.getSystemService(NotificationManager.class);
         manager.notify(random.nextInt(), notification);
+    }
+
+    public static void showNewRecipe(Context context, String notiTitle, String notiText,
+                                     String recipeTitle, String ingredients, String recipe) {
+
+        Intent intent = new Intent(context, RecipeActivity.class);
+        intent.putExtra("title", recipeTitle);
+        intent.putExtra("ingredients", ingredients);
+        intent.putExtra("recipe", recipe);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 6,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Notification notification = new Notification.Builder(context, Constants.CHANNEL_NEW_RECIPE)
+                .setSmallIcon(R.drawable.app_logo_only)
+                .setContentTitle(notiTitle)
+                .setContentText(notiText)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+        context.getSystemService(NotificationManager.class).notify(654654, notification);
     }
 
     public static void showBigTextNotification(Context context, String title, String text) {

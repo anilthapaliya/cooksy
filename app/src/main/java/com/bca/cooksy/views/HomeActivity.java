@@ -28,6 +28,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bca.cooksy.R;
 import com.bca.cooksy.utils.Constants;
+import com.bca.cooksy.utils.NotificationUtils;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 public class HomeActivity extends AppCompatActivity {
@@ -56,6 +57,9 @@ public class HomeActivity extends AppCompatActivity {
         showProgress(true);
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             showProgress(false);
+            NotificationUtils.showNewRecipe(this, "New Recipe", "Make a delicious dish today!",
+                    "Omelette Recipe", "Eggs, Salt, Pepper, Oil",
+                    "- Put oil on pan.\n- Crack open the eggs.- Sprinkle salt and pepper.\n- Cook for 2 minutes on both sides.\n- Savour your tasty omelette.");
         }, 5000);
     }
 
