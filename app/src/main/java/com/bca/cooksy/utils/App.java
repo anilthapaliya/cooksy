@@ -3,14 +3,20 @@ package com.bca.cooksy.utils;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
+import android.content.IntentFilter;
 
 public class App extends Application {
+
+    private DeviceStateReceiver deviceStateReceiver;
+    private ConnectivityReceiver connectivityReceiver;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         createChannels();
+        register();
     }
 
     private void createChannels() {
@@ -27,6 +33,24 @@ public class App extends Application {
         NotificationManager manager = getSystemService(NotificationManager.class);
         manager.createNotificationChannel(channelAppUpdates);
         manager.createNotificationChannel(channelRecipes);
+    }
+
+    private void register() {
+
+        deviceStateReceiver = new DeviceStateReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(deviceStateReceiver, filter);
+
+        connectivityReceiver = new ConnectivityReceiver();
+        IntentFilter filter1 = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(connectivityReceiver, filter1);
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        unregisterReceiver(deviceStateReceiver);
+        unregisterReceiver(connectivityReceiver);
     }
 
 }

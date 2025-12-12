@@ -156,4 +156,8 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 }

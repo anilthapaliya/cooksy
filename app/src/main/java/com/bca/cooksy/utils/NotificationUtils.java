@@ -30,6 +30,7 @@ public class NotificationUtils {
                 .setContentText(text)
                 .setSmallIcon(R.drawable.app_logo_only)
                 .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
                 .build();
         Random random = new Random();
         NotificationManager manager = context.getSystemService(NotificationManager.class);
