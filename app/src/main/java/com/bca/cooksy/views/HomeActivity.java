@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,16 +27,24 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bca.cooksy.R;
+import com.bca.cooksy.controllers.HomeController;
 import com.bca.cooksy.utils.Constants;
 import com.bca.cooksy.utils.NotificationUtils;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView tvUsername;
     private ImageView imgProfile;
+    private FloatingActionButton btnAdd;
+    private ProgressBar progressBar;
     private HorizontalScrollView scrollDishes;
     private ShimmerFrameLayout shimmerDishes;
+    private HomeController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +57,10 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
         Log.v(TAG, "onCreate called");
+        controller = new HomeController(this);
 
         findViews();
+        registerEvents();
         setupProfile();
         handlePermission();
 
@@ -66,8 +77,36 @@ public class HomeActivity extends AppCompatActivity {
 
         tvUsername = findViewById(R.id.tvUsername);
         imgProfile = findViewById(R.id.imgProfile);
+        btnAdd = findViewById(R.id.btnAdd);
+        progressBar = findViewById(R.id.progressBar);
         scrollDishes = findViewById(R.id.scrollDishes);
         shimmerDishes = findViewById(R.id.shimmerDishes);
+    }
+
+    private void registerEvents() {
+
+        btnAdd.setOnClickListener(v -> {
+            BottomSheetDialog dialog = new BottomSheetDialog(this);
+            View view = getLayoutInflater().inflate(R.layout.add_new_recipe, null);
+            dialog.setContentView(view);
+
+            MaterialButton btnAddRecipe = view.findViewById(R.id.btnAddRecipe);
+            btnAddRecipe.setOnClickListener(b -> {
+                controller.addRecipe();
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
+    }
+
+    public void showMessage(String message) {
+
+        Snackbar.make(btnAdd, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    public void showInfiniteProgress(boolean value) {
+
+        progressBar.setVisibility(value ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void showProgress(boolean value) {

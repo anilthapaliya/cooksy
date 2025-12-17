@@ -85,4 +85,38 @@ public class NotificationUtils {
         manager.notify(6545, notification);
     }
 
+    public static void showProgressNotification(Context context, String title, String text, int id) {
+
+        Notification notification = new Notification.Builder(context, Constants.CHANNEL_APP_UPDATE)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setSmallIcon(R.drawable.baseline_upload)
+                .setOngoing(true)
+                .setProgress(0, 0, true)
+                .build();
+
+        NotificationManager manager = context.getSystemService(NotificationManager.class);
+        manager.notify(id, notification);
+    }
+
+    public static void updateNotification(Context context, String title, String text, int id) {
+
+        Notification notification = new Notification.Builder(context, Constants.CHANNEL_APP_UPDATE)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setSmallIcon(R.drawable.baseline_check_circle)
+                .setOngoing(true)
+                .setProgress(0, 100, false)
+                .build();
+
+        NotificationManager manager = context.getSystemService(NotificationManager.class);
+        manager.notify(id, notification);
+    }
+
+    public static void cancelNotification(Context context, int id) {
+
+        NotificationManager manager = context.getSystemService(NotificationManager.class);
+        manager.cancel(id);
+    }
+
 }
