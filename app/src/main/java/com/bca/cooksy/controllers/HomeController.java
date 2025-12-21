@@ -1,12 +1,19 @@
 package com.bca.cooksy.controllers;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.bca.cooksy.utils.Constants;
 import com.bca.cooksy.utils.NotificationUtils;
+import com.bca.cooksy.utils.ReminderReceiver;
 import com.bca.cooksy.views.HomeActivity;
 
 public class HomeController {
@@ -16,7 +23,31 @@ public class HomeController {
     public HomeController(HomeActivity view) {
 
         this.view = view;
-        scheduleNotification();
+        //scheduleNotification();
+    }
+
+    public void setReminder(String message, String minutes) {
+
+        int min;
+        try {
+            min = Integer.parseInt(minutes);
+        } catch (NumberFormatException e) {
+            min = 1;
+        }
+
+        Intent intent = new Intent(view, ReminderReceiver.class);
+        intent.putExtra(Constants.REMINDER_TITLE, message);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(view, 376,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        long timeWhen = System.currentTimeMillis() + (long) min * 60 * 1000;
+
+        try {
+            AlarmManager alarmManager = (AlarmManager) view.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeWhen, pendingIntent);
+        } catch (SecurityException e) { Log.d("ALARM Exception", "Unable to schedule exact alarm."); return; }
+
+        view.showMessage("Reminder successfully set after " + min + " minutes.");
     }
 
     public void addRecipe() {

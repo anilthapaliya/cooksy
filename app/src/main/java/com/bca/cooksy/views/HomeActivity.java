@@ -1,6 +1,8 @@
 package com.bca.cooksy.views;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -8,10 +10,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +40,7 @@ import com.bca.cooksy.utils.NotificationUtils;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -41,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvUsername;
     private ImageView imgProfile;
     private FloatingActionButton btnAdd;
+    private MaterialCardView cardReminder;
     private ProgressBar progressBar;
     private HorizontalScrollView scrollDishes;
     private ShimmerFrameLayout shimmerDishes;
@@ -78,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUsername);
         imgProfile = findViewById(R.id.imgProfile);
         btnAdd = findViewById(R.id.btnAdd);
+        cardReminder = findViewById(R.id.cardReminder);
         progressBar = findViewById(R.id.progressBar);
         scrollDishes = findViewById(R.id.scrollDishes);
         shimmerDishes = findViewById(R.id.shimmerDishes);
@@ -97,6 +107,60 @@ public class HomeActivity extends AppCompatActivity {
             });
             dialog.show();
         });
+
+        cardReminder.setOnClickListener(v -> {
+
+            AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (manager.canScheduleExactAlarms()) {
+                showReminderDialog();
+            }
+            else {
+                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void showReminderDialog() {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                .setTitle("Set a reminder")
+                .setMessage("Please enter a title and minutes to schedule a reminder.");
+        EditText etTitle = new EditText(this);
+        etTitle.setHint("Title");
+        etTitle.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        EditText etMinute = new EditText(this);
+        etMinute.setHint("After minutes");
+        etMinute.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(12, 15, 12, 15);
+        layout.setLayoutParams(params);
+        layout.addView(etTitle);
+        layout.addView(etMinute);
+
+        dialog.setCancelable(false);
+        dialog.setView(layout);
+        dialog.setNegativeButton("Cancel", (d, i) -> d.dismiss());
+        dialog.setPositiveButton("SET", (d, i) -> {
+            // code to schedule a reminder.
+            String msg = etTitle.getText().toString();
+            String minutes = etMinute.getText().toString();
+            if (msg.isEmpty() || minutes.isEmpty())
+                Toast.makeText(this, "Please enter all fields.", Toast.LENGTH_LONG).show();
+            else {
+                controller.setReminder(msg, minutes);
+                d.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     public void showMessage(String message) {

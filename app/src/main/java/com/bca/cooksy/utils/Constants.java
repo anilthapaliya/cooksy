@@ -12,4 +12,6 @@ public class Constants {
     public static final String CHANNEL_APP_UPDATE = "CHANNEL_APP_UPDATE";
     public static final String CHANNEL_NEW_RECIPE = "CHANNEL_NEW_RECIPE";
 
+    public static final String REMINDER_TITLE = "reminder_message";
+
 }
