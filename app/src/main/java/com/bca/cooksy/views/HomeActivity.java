@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvUsername;
     private ImageView imgProfile;
     private FloatingActionButton btnAdd;
-    private MaterialCardView cardReminder;
+    private MaterialCardView cardReminder, cardRandomRecipe;
     private ProgressBar progressBar;
     private HorizontalScrollView scrollDishes;
     private ShimmerFrameLayout shimmerDishes;
@@ -74,12 +74,12 @@ public class HomeActivity extends AppCompatActivity {
         handlePermission();
 
         showProgress(true);
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        /*new Handler(Looper.getMainLooper()).postDelayed(() -> {
             showProgress(false);
             NotificationUtils.showNewRecipe(this, "New Recipe", "Make a delicious dish today!",
                     "Omelette Recipe", "Eggs, Salt, Pepper, Oil",
                     "- Put oil on pan.\n- Crack open the eggs.- Sprinkle salt and pepper.\n- Cook for 2 minutes on both sides.\n- Savour your tasty omelette.");
-        }, 5000);
+        }, 5000);*/
     }
 
     private void findViews() {
@@ -88,6 +88,7 @@ public class HomeActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.imgProfile);
         btnAdd = findViewById(R.id.btnAdd);
         cardReminder = findViewById(R.id.cardReminder);
+        cardRandomRecipe = findViewById(R.id.cardRandomRecipe);
         progressBar = findViewById(R.id.progressBar);
         scrollDishes = findViewById(R.id.scrollDishes);
         shimmerDishes = findViewById(R.id.shimmerDishes);
@@ -118,6 +119,11 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
                 startActivity(intent);
             }
+        });
+
+        cardRandomRecipe.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RandomRecipeActivity.class);
+            startActivity(intent);
         });
     }
 

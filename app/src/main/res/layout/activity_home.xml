@@ -265,188 +265,214 @@
             android:text="Set a reminder"/>
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:id="@+id/layoutTitleSecond"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginVertical="@dimen/globalMargin"
         app:layout_constraintTop_toBottomOf="@id/cardReminder"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Our Top Dishes"
-            android:textSize="@dimen/titleFont"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See all"
-            android:textSize="@dimen/mediumFont"/>
-    </LinearLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/scrollDishes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/layoutTitleSecond"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline3">
+        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <LinearLayout
-                android:id="@+id/layoutDish1"
-                android:layout_width="wrap_content"
+                android:id="@+id/layoutTitleSecond"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical">
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    app:cardCornerRadius="16dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/salad"
-                        android:scaleType="centerCrop"/>
-                </com.google.android.material.card.MaterialCardView>
+                android:layout_marginBottom="8dp"
+                android:layout_marginVertical="@dimen/globalMargin"
+                android:orientation="horizontal">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Green Salad"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
+                    android:text="Our Top Dishes"
                     android:textSize="@dimen/titleFont"
+                    android:textColor="@color/black"
                     android:textStyle="bold"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="By Rambo Babu"
-                    android:textAlignment="textStart"
+                    android:text="See all"
                     android:textSize="@dimen/mediumFont"/>
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/layoutDish2"
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:id="@+id/scrollDishes"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical">
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    app:cardCornerRadius="16dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/fries"
-                        android:scaleType="centerCrop"/>
-                </com.google.android.material.card.MaterialCardView>
-                <TextView
-                    android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hot Fries"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/titleFont"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="match_parent"
+                    android:paddingBottom="8dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/layoutDish1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            app:cardCornerRadius="16dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/salad"
+                                android:scaleType="centerCrop"/>
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Green Salad"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/titleFont"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="By Rambo Babu"
+                            android:textAlignment="textStart"
+                            android:textSize="@dimen/mediumFont"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/layoutDish2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            app:cardCornerRadius="16dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/fries"
+                                android:scaleType="centerCrop"/>
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hot Fries"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/titleFont"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="By Sarina B"
+                            android:textAlignment="textStart"
+                            android:textSize="@dimen/mediumFont"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerDishes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="By Sarina B"
-                    android:textAlignment="textStart"
-                    android:textSize="@dimen/mediumFont"/>
-            </LinearLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
+                    android:paddingBottom="8dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            app:cardCornerRadius="16dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#DDDDDD"
+                                android:scaleType="centerCrop"/>
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#DDDDDD"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/titleFont"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#DDDDDD"
+                            android:textAlignment="textStart"
+                            android:textSize="@dimen/mediumFont"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            app:cardCornerRadius="16dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#DDDDDD"
+                                android:scaleType="centerCrop"/>
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#DDDDDD"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/titleFont"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#DDDDDD"
+                            android:textAlignment="textStart"
+                            android:textSize="@dimen/mediumFont"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerDishes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutTitleSecond"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline3">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRandomRecipe"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical">
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    app:cardCornerRadius="16dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#DDDDDD"
-                        android:scaleType="centerCrop"/>
-                </com.google.android.material.card.MaterialCardView>
+                android:layout_marginVertical="24dp"
+                android:backgroundTint="@color/secondaryColor"
+                app:cardCornerRadius="20dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#DDDDDD"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/titleFont"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#DDDDDD"
-                    android:textAlignment="textStart"
-                    android:textSize="@dimen/mediumFont"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical">
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    app:cardCornerRadius="16dp">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#DDDDDD"
-                        android:scaleType="centerCrop"/>
-                </com.google.android.material.card.MaterialCardView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#DDDDDD"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/titleFont"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#DDDDDD"
-                    android:textAlignment="textStart"
-                    android:textSize="@dimen/mediumFont"/>
-            </LinearLayout>
+                    android:padding="25dp"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/baseline_food_recipe"
+                    android:drawableTint="@color/white"
+                    android:drawablePadding="20dp"
+                    android:textSize="@dimen/btnFont"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:text="Try out a random recipe"/>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"

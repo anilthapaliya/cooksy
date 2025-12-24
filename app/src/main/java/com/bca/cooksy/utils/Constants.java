@@ -14,4 +14,7 @@ public class Constants {
 
     public static final String REMINDER_TITLE = "reminder_message";
 
+    /* API Constants */
+    public static final String API_MEAL = "https://www.themealdb.com/api/json/v1/1/random.php";
+
 }
