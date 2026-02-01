@@ -5,11 +5,13 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 
 public class App extends Application {
 
     private DeviceStateReceiver deviceStateReceiver;
     private ConnectivityReceiver connectivityReceiver;
+    public static SQLiteDatabase db;
 
     @Override
     public void onCreate() {
@@ -17,6 +19,7 @@ public class App extends Application {
 
         createChannels();
         register();
+        initDatabase();
     }
 
     private void createChannels() {
@@ -33,6 +36,12 @@ public class App extends Application {
         NotificationManager manager = getSystemService(NotificationManager.class);
         manager.createNotificationChannel(channelAppUpdates);
         manager.createNotificationChannel(channelRecipes);
+    }
+
+    private void initDatabase() {
+
+        DbHelper helper = new DbHelper(this);
+        db = helper.getWritableDatabase();
     }
 
     private void register() {

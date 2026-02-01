@@ -19,6 +19,14 @@ public class Recipe {
     @SerializedName("strInstructions")
     String instructions;
 
+    public Recipe() {}
+
+    public Recipe(String title, String origin, String category) {
+        this.title = title;
+        this.origin = origin;
+        this.category = category;
+    }
+
     public String getTitle() {
         return title;
     }

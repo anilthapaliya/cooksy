@@ -46,7 +46,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView tvUsername;
+    private TextView tvUsername, tvSeeAllDishes;
     private ImageView imgProfile;
     private FloatingActionButton btnAdd;
     private MaterialCardView cardReminder, cardRandomRecipe;
@@ -74,17 +74,18 @@ public class HomeActivity extends AppCompatActivity {
         handlePermission();
 
         showProgress(true);
-        /*new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             showProgress(false);
-            NotificationUtils.showNewRecipe(this, "New Recipe", "Make a delicious dish today!",
+            /*NotificationUtils.showNewRecipe(this, "New Recipe", "Make a delicious dish today!",
                     "Omelette Recipe", "Eggs, Salt, Pepper, Oil",
-                    "- Put oil on pan.\n- Crack open the eggs.- Sprinkle salt and pepper.\n- Cook for 2 minutes on both sides.\n- Savour your tasty omelette.");
-        }, 5000);*/
+                    "- Put oil on pan.\n- Crack open the eggs.- Sprinkle salt and pepper.\n- Cook for 2 minutes on both sides.\n- Savour your tasty omelette.");*/
+        }, 3000);
     }
 
     private void findViews() {
 
         tvUsername = findViewById(R.id.tvUsername);
+        tvSeeAllDishes = findViewById(R.id.tvSeeAllDishes);
         imgProfile = findViewById(R.id.imgProfile);
         btnAdd = findViewById(R.id.btnAdd);
         cardReminder = findViewById(R.id.cardReminder);
@@ -123,6 +124,11 @@ public class HomeActivity extends AppCompatActivity {
 
         cardRandomRecipe.setOnClickListener(v -> {
             Intent intent = new Intent(this, RandomRecipeActivity.class);
+            startActivity(intent);
+        });
+
+        tvSeeAllDishes.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DishesActivity.class);
             startActivity(intent);
         });
     }

@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cooksy">
         <activity
+            android:name=".views.DishesActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.RandomRecipeActivity"
             android:exported="false" />
         <activity

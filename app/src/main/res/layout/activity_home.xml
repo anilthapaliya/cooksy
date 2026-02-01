@@ -287,7 +287,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Our Top Dishes"
+                    android:text="My Dishes"
                     android:textSize="@dimen/titleFont"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
@@ -296,6 +296,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
                 <TextView
+                    android:id="@+id/tvSeeAllDishes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See all"
