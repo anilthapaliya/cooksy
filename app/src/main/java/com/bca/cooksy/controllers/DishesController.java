@@ -60,19 +60,30 @@ public class DishesController {
 
     public void deleteRecipe(int position) {
 
+        String title = recipes.get(position).getTitle();
+        String query = "DELETE FROM " + DbHelper.RECIPE_TABLE + " WHERE title = '" + title + "'";
+        App.db.execSQL(query);
+
         recipes.remove(position);
         adapter.notifyItemRemoved(position);
     }
 
     public void editRecipe(Recipe recipe) {
 
+        ContentValues values = new ContentValues();
+        values.put("category", recipe.getCategory());
+        values.put("origin", recipe.getOrigin());
+
+        App.db.update(DbHelper.RECIPE_TABLE, values,
+                "title = ?", new String[]{recipe.getTitle()});
+
         for (int i = 0; i < recipes.size(); i++) {
             if (recipes.get(i).getTitle().equals(recipe.getTitle())) {
                 recipes.set(i, recipe);
+                adapter.notifyItemChanged(i);
                 break;
             }
         }
-        adapter.notifyDataSetChanged();
     }
 
 }

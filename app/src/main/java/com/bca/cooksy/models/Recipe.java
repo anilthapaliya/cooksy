@@ -21,7 +21,7 @@ public class Recipe {
 
     public Recipe() {}
 
-    public Recipe(String title, String origin, String category) {
+    public Recipe(String title, String category, String origin) {
         this.title = title;
         this.origin = origin;
         this.category = category;

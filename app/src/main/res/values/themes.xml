@@ -36,6 +36,7 @@
         <item name="android:textStyle">bold</item>
         <item name="backgroundTint">@color/white</item>
     </style>
+
     <!-- Base application theme. -->
     <style name="Base.Theme.Cooksy" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
