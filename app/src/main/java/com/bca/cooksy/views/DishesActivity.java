@@ -1,5 +1,6 @@
 package com.bca.cooksy.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import com.bca.cooksy.R;
 import com.bca.cooksy.adapter.RecipeAdapter;
 import com.bca.cooksy.controllers.DishesController;
 import com.bca.cooksy.models.Recipe;
+import com.bca.cooksy.services.RecipeService;
+import com.bca.cooksy.utils.Constants;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,6 +28,7 @@ public class DishesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerDishes;
     private FloatingActionButton fabAdd;
+    private ImageView imgStart, imgStop;
     DishesController controller;
     RecipeAdapter adapter;
 
@@ -42,6 +46,11 @@ public class DishesActivity extends AppCompatActivity {
 
         recyclerDishes = findViewById(R.id.recyclerDishes);
         fabAdd = findViewById(R.id.fabAdd);
+        imgStart = findViewById(R.id.imgStart);
+        imgStop = findViewById(R.id.imgStop);
+
+        imgStart.setOnClickListener(v -> startService());
+        imgStop.setOnClickListener(v -> stopService());
 
         controller = new DishesController(this);
         this.adapter = new RecipeAdapter(controller.recipes, new RecipeAdapter.ItemClickListener() {
@@ -99,6 +108,27 @@ public class DishesActivity extends AppCompatActivity {
 
         dialog.setContentView(view);
         dialog.show();
+    }
+
+    Intent serviceIntent;
+    private void startService() {
+
+        if (RecipeService.isRunning()) {
+            Toast.makeText(this, "The service is already running.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        serviceIntent = new Intent(this, RecipeService.class);
+        serviceIntent.putExtra("api", Constants.API_MEAL);
+        startService(serviceIntent);
+        Toast.makeText(this, "The service is running.", Toast.LENGTH_LONG).show();
+    }
+
+    private void stopService() {
+
+        if (serviceIntent != null) {
+            stopService(serviceIntent);
+            Toast.makeText(this, "The service is stopped.", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

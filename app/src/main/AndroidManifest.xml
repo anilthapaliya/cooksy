@@ -77,6 +77,8 @@
             android:grantUriPermissions="true"
             android:exported="true"
             android:permission="com.bca.cooksy.permission.READ_DATA" />
+
+        <service android:name=".services.RecipeService" />
     </application>
 
     <permission android:name="com.bca.cooksy.permission.READ_DATA"
